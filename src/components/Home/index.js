@@ -10,6 +10,10 @@ export default function Home() {
   const [canRedirect, setCanRedirect] = useState(false);
 
   function handleSubmit() {
+    if (periodToBeNotificated <= 1) {
+      setperiodToBeNotificated(10);
+    }
+    
     setCanRedirect(true);
   }
 
