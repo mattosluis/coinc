@@ -22,7 +22,7 @@ export default function Main() {
 
   useEffect(() => {
     const salaryByHour = salary / workedHours;
-    const salaryByPeriod = ((periodToBeNotificated * salaryByHour) / 60);
+    const salaryByPeriod = ((periodToBeNotificated * salaryByHour) / 60) / 60;
     setEarnsPerPeriod(salaryByPeriod);
   }, [workedHours, salary, periodToBeNotificated]);
 
