@@ -45,12 +45,12 @@ export default function Home() {
               onChange={e => setSalary(e.target.value)}
             />
 
-            <label htmlFor="PeriodToNotificate">Periodo que deseja ser notificado (minutos)</label>
+            <label htmlFor="PeriodToNotificate">Periodo que deseja ser notificado (segundos)</label>
             <input 
               id="PeriodToNotificate"
               type="number"
               placeholder="30"
-              min="1"
+              min="10"
               onChange={e => setperiodToBeNotificated(e.target.value)}
             />
           </FormInputs>

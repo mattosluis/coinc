@@ -33,7 +33,7 @@ export default function Main() {
       setEarnedToday(earnedToday + earnsPerPeriod);
       setShowConfetti(true);
       setAnimatedPig(true);
-    }, periodToBeNotificated * 60000);
+    }, periodToBeNotificated * 1000);
     
     return (() => clearInterval(interval))
   }, [earnedToday, earnsPerPeriod, periodToBeNotificated, audioCoin]);
