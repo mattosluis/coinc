@@ -7,13 +7,10 @@ export default function Home() {
   const [workedHours, setWorkedHours] = useState(1);
   const [salary, setSalary] = useState(1);
   const [periodToBeNotificated, setperiodToBeNotificated] = useState(1);
+  const [periodType, setPeriodType] = useState('Minutos');
   const [canRedirect, setCanRedirect] = useState(false);
 
-  function handleSubmit() {
-    if (periodToBeNotificated <= 1) {
-      setperiodToBeNotificated(10);
-    }
-    
+  function handleSubmit() {    
     setCanRedirect(true);
   }
 
@@ -22,11 +19,12 @@ export default function Home() {
       { canRedirect ? (
         <Redirect to={{ 
           pathname: "/earn-money",
-          state: { workedHours, salary, periodToBeNotificated }
+          state: { workedHours, salary, periodToBeNotificated, periodType }
         }} />
         ) : (
         <Form onSubmit={() => handleSubmit()}>
           <h1>Bem-vindo ao Coinc!</h1>
+          <p>Descubra o quanto você ganha por um período de tempo</p>
           <FormInputs>
             <label htmlFor="WorkedHours">Horas trabalhadas por mês</label>
             <input 
@@ -49,14 +47,20 @@ export default function Home() {
               onChange={e => setSalary(e.target.value)}
             />
 
-            <label htmlFor="PeriodToNotificate">Periodo que deseja ser notificado (segundos)</label>
+            <label htmlFor="PeriodToNotificate">Quanto tempo você quer ver seu dinheir entrar?</label>
             <input 
               id="PeriodToNotificate"
               type="number"
               placeholder="30"
-              min="10"
+              min="1"
               onChange={e => setperiodToBeNotificated(e.target.value)}
             />
+
+            <select value={periodType} onChange={e => setPeriodType(e.target.value)}>
+              <option>Segundos</option>
+              <option defaultChecked>Minutos</option>
+              <option>Horas</option>
+            </select>
           </FormInputs>
           <button type="submit">Ganhar dinheiro!</button>
         </Form>

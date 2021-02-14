@@ -5,8 +5,8 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 40rem;
-  height: 42rem;
+  width: 50rem;
+  height: 52rem;
   background-color: #FFF;
   border-radius: 0.5rem;
   margin: 2rem;
@@ -21,7 +21,12 @@ export const Form = styled.form`
 
   h1 {
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 1.5rem;
   }
 
   button {
@@ -59,6 +64,15 @@ export const FormInputs = styled.div`
   input {
     font-size: 1.6rem;
     height: 2.2rem;
+    border: 0.1rem solid #C6C6C6;
+    border-radius: 0.5rem;
+    margin-bottom: 1.5rem;
+    padding: 0.8rem;
+  }
+
+  select {
+    font-size: 1.6rem;
+    height: 4rem;
     border: 0.1rem solid #C6C6C6;
     border-radius: 0.5rem;
     margin-bottom: 1.5rem;

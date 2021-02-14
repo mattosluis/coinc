@@ -5,12 +5,15 @@ import Confetti from "react-confetti";
 import pig from "../../assets/pig.svg"
 import coinSound from "../../assets/coin.mp3";
 import showOnlyTwoDecimal from "../../utils/showOnlyTwoDecimal";
+import calculateSalaryFromWorkedHours from "../../utils/calculateSalaryFromWorkedHours";
+import calculateSalaryFromPeriodType from "../../utils/calculateSalaryFromPeriodType";
+import timeToNotifyEarns from "../../utils/timeToNotifyEarns";
 
 import { Container, Button, PigImage } from "./styles";
 
 export default function Main() {
   const location = useLocation();
-  const { workedHours, salary, periodToBeNotificated } = location.state;
+  const { workedHours, salary, periodToBeNotificated, periodType } = location.state;
   const [, setTime] = useState(Date.now());
   const [earnedToday, setEarnedToday] = useState(0);
   const [earnsPerPeriod, setEarnsPerPeriod] = useState(0);
@@ -21,10 +24,10 @@ export default function Main() {
   useMemo(() => setAudioCoint(new Audio(coinSound)), []);
 
   useEffect(() => {
-    const salaryByHour = salary / workedHours;
-    const salaryByPeriod = ((periodToBeNotificated * salaryByHour) / 60) / 60;
+    const salaryByHour = calculateSalaryFromWorkedHours(workedHours, salary);
+    const salaryByPeriod = calculateSalaryFromPeriodType(periodToBeNotificated, periodType, salaryByHour);
     setEarnsPerPeriod(salaryByPeriod);
-  }, [workedHours, salary, periodToBeNotificated]);
+  }, [workedHours, salary, periodToBeNotificated, periodType]);
 
   useEffect(() => {
     const interval = setInterval(() => { 
@@ -33,10 +36,10 @@ export default function Main() {
       setEarnedToday(earnedToday + earnsPerPeriod);
       setShowConfetti(true);
       setAnimatedPig(true);
-    }, periodToBeNotificated * 1000);
+    }, timeToNotifyEarns(periodToBeNotificated, periodType));
     
     return (() => clearInterval(interval))
-  }, [earnedToday, earnsPerPeriod, periodToBeNotificated, audioCoin]);
+  }, [earnedToday, earnsPerPeriod, periodToBeNotificated, audioCoin, periodType]);
 
   useEffect(() => {
     if(showConfetti) {
